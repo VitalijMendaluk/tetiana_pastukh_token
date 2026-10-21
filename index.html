@@ -428,7 +428,7 @@ h2{ font-size:21px; line-height:1.3; margin:0 0 16px; letter-spacing:-.01em; }
         </div>
 
         <div class="field">
-          <label for="phone">Телефон / WhatsApp</label>
+          <label for="phone">Телефон / WhatsApp / Telegram / Viber</label>
           <div class="phone-row">
             <div class="cc">
               <button type="button" class="cc-btn" id="ccBtn"><span class="flag" id="ccFlag">🇺🇦</span><span id="ccDial">+380</span><span class="arr">▼</span></button>
@@ -662,7 +662,8 @@ form.addEventListener('submit', async (e)=>{
   if(phoneRaw.replace(/\D/g,'').length<6){ errP.style.display='block'; ok=false; }
   if(!ok) return;
 
-  const phone = selectedCountry.d + ' ' + phoneRaw;
+  // Якщо номер уже введено з кодом країни (+48…) — не дописуємо код із селектора
+  const phone = phoneRaw.startsWith('+') ? phoneRaw : selectedCountry.d + ' ' + phoneRaw;
   const payload = {
     name,
     phone,
